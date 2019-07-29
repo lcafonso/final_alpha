@@ -26,7 +26,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('publications') }}">
+                    <a class="nav-link" href="{{ route('gallery') }}">
                         Fotografias
                     </a>
                 </li>

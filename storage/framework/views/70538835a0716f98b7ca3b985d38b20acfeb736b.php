@@ -1,5 +1,5 @@
 <!-- Page Header -->
-@if($pageData['smenu'] == 1)
+<?php if($pageData['smenu'] == 1): ?>
 
     <header>
 
@@ -9,7 +9,7 @@
             <div class="video-wrap">
                 <div id="video">
                     <video id="bgvid" autoplay loop muted playsinline>
-                        <source src="{{asset('img/videos/promo.mp4')}}" type="video/mp4">
+                        <source src="<?php echo e(asset('img/videos/promo.mp4')); ?>" type="video/mp4">
                     </video>
                 </div>
             </div>
@@ -28,14 +28,14 @@
         <!--- Apoios -->
         <div class="home-page__cover__footer">
             <div class="title">Apoio:</div>
-            <img src="{{asset('img/ipb_cimo.svg')}}" alt="">
+            <img src="<?php echo e(asset('img/ipb_cimo.svg')); ?>" alt="">
         </div>
 
     </header>
 
-@else
+<?php else: ?>
 
-    <header class="masthead" style="background-image: url({{asset( $pageData['bg'] ) }} ); max-height: 350px; )">
+    <header class="masthead" style="background-image: url(<?php echo e(asset( $pageData['bg'] )); ?> ); max-height: 350px; )">
 
 
     <div class="overlay"></div>
@@ -43,7 +43,7 @@
 
         <div class="row">
             <div class="col-lg-8 col-md-12 mx-auto">
-                @if($pageData['smenu'] != 1)
+                <?php if($pageData['smenu'] != 1): ?>
                     <div class="post-heading">
                         <!-- Global Page Section Start  -->
                         <section class="global-page-header">
@@ -51,10 +51,10 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="block">
-                                            <h2 >{{ $pageData['title'] }}</h2>
+                                            <h2 ><?php echo e($pageData['title']); ?></h2>
                                         </div>
                                     </div>
-                                    @if($pageData['smenu'] == 23)
+                                    <?php if($pageData['smenu'] == 23): ?>
                                         <div class="col-md-6">
                                             <ul class="nav nav-tabs" role="tablist">
                                                 <li class="nav-item">
@@ -69,7 +69,7 @@
                                             <!-- Tab panes -->
                                             <div class="tab-content">
                                                 <div id="home" class="container tab-pane active"><br>
-                                                    <form action="{{ route('simple_search') }}" method="GET">
+                                                    <form action="<?php echo e(route('simple_search')); ?>" method="GET">
                                                     <div class="input-group">
                                                         <input type="text" class="form-control" placeholder="Titulo" aria-describedby="basic-addon2" name="search">
                                                         <div class="input-group-append">
@@ -79,7 +79,7 @@
                                                     </form>
                                                 </div>
                                                 <div id="menu1" class="container tab-pane fade"><br>
-                                                    <form action="{{ route('advance_search') }}" method="GET">
+                                                    <form action="<?php echo e(route('advance_search')); ?>" method="GET">
                                                         <div class="input-group">
                                                         <input type="text" name="name" class="form-control" placeholder="Titulo">
 
@@ -98,12 +98,12 @@
                                             </div>
                                         </div>
 
-                                    @endif
+                                    <?php endif; ?>
                                 </div>
 
                         </section>
                     </div>
-                @endif
+                <?php endif; ?>
             </div>
         </div>
 
@@ -113,8 +113,9 @@
 
 
 
-@endif
+<?php endif; ?>
 
 
 
 
+<?php /**PATH D:\laragon\www\final_alpha\resources\views/layouts/partials/header.blade.php ENDPATH**/ ?>

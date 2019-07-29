@@ -1,8 +1,5 @@
-@extends('layouts.main')
-
-{{--Section Head--}}
-@section('head')
-    {{-- Another scripts and styles in head--}}
+<?php $__env->startSection('head'); ?>
+    
 
 
 
@@ -187,32 +184,33 @@
     </style>
 
 
-@endsection
+<?php $__env->stopSection(); ?>
 
-{{--Section footer--}}
 
-@section('content')
+
+<?php $__env->startSection('content'); ?>
 
 
 
     <div class="row">
 
 
-    @foreach($posts as $post)
+    <?php $__currentLoopData = $posts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $post): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 
     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mt-4" style="height: 300px;">
 
         <div class="hovereffect">
-            <img src="{{asset($post->file)}}" alt="{{$post->name}}" class="responsive"/>
+            <img src="<?php echo e(asset($post->file)); ?>" alt="<?php echo e($post->name); ?>" class="responsive"/>
             <div class="overlay">
                 <div class="dh2">
                     <div class="row">
                         <div class="col-md-12 offset-md-0" style="text-align: left;" >
-                            <img src="{{asset($post->user->profile->file)}}" alt="{{$post->user->profile->name}}" class="cir-responsive"/>
+                            <img src="<?php echo e(asset($post->user->profile->file)); ?>" alt="<?php echo e($post->user->profile->name); ?>" class="cir-responsive"/>
 
-                            {{$post->user->name}}
-                            <p style="font-size: 50%;">{{$post->user->profile->country}}</p>
-                            <p style="font-size: 50%;">Titulo: {{$post->name}}</p>
+                            <?php echo e($post->user->name); ?>
+
+                            <p style="font-size: 50%;"><?php echo e($post->user->profile->country); ?></p>
+                            <p style="font-size: 50%;">Titulo: <?php echo e($post->name); ?></p>
                         </div>
                     </div>
 
@@ -220,7 +218,7 @@
                 </div>
 
 
-                    <a class="info" href="{{ route('detail', $post->slug)  }}">Ver mais</a>
+                    <a class="info" href="<?php echo e(route('detail', $post->slug)); ?>">Ver mais</a>
 
 
             </div>
@@ -229,24 +227,27 @@
 
     </div>
 
-    @endforeach
+    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
     </div>
 
     <hr>
 
 <div class="row">
     <nav class="col-lg-12">
-        {{ $posts->render() }}
+        <?php echo e($posts->render()); ?>
+
     </nav>
 </div>
 
 
 
-@endsection
-
-{{--Section footer--}}
-@section('footer')
+<?php $__env->stopSection(); ?>
 
 
+<?php $__env->startSection('footer'); ?>
 
-@endsection
+
+
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.main', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\laragon\www\final_alpha\resources\views/web/gallery.blade.php ENDPATH**/ ?>

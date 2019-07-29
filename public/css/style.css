@@ -15,6 +15,14 @@ body {
 
 }
 
+.masthead h2 {
+    font-size: 4rem;
+    font-weight: 700;
+    letter-spacing: 0.2rem;
+    text-shadow: 0.1rem 0.1rem 0.8rem black;
+    padding-bottom: 1rem;
+}
+
 .navbar {
     background: rgba( 0, 0, 0, 0.6)!important;
     text-transform: uppercase;

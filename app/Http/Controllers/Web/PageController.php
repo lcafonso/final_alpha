@@ -40,12 +40,67 @@ class PageController extends Controller
 
     public function gallery() {
 
-        $posts = Post::orderBy('id','DESC')->where('status','PUBLISHED')->paginate(3);
+        $posts = Post::orderBy('id','DESC')->where('status','PUBLISHED')->paginate( 12);
         $categs = DB::table('categories')->get();
 
-        $pageData = ['title' => 'Galeria', 'smenu' => '23', 'bg' => 'img/publish-bg.jpg'];
+        $pageData = ['title' => 'Fotografias', 'smenu' => '23', 'bg' => 'img/publish-bg.jpg'];
 
         return view('web.gallery', compact('pageData','posts','categs') );
+
+    }
+
+    public function simple(Request $request)
+
+    {
+
+        $posts = Post::orderBy('id','DESC')->where('status','PUBLISHED');
+
+        if( $request->input('search')){
+            $posts = $posts->where('name', 'LIKE', "%" . $request->search . "%");
+        }
+
+        $posts = $posts->paginate(12);
+
+        $categs = DB::table('categories')->get();
+
+        $pageData = ['title' => 'Fotografias', 'smenu' => '23', 'bg' => 'img/publish-bg.jpg'];
+
+        return view('web.gallery', compact('pageData','posts','categs'));
+
+    }
+
+    public function advance(Request $request)
+
+    {
+
+        $posts = Post::orderBy('id','DESC')->where('status','PUBLISHED');
+
+        if( $request->name){
+
+            $posts = $posts->where('name', 'LIKE', "%" . $request->name . "%");
+
+        }
+
+        if( $request->author){
+
+            //$posts = $posts->where('users.name', 'LIKE', "%" . $request->author . "%");
+
+        }
+
+        if( $request->min_age && $request->max_age ){
+
+            $posts = $posts->where('created', '>=', $request->min_age)
+
+                ->where('created', '<=', $request->max_age);
+
+        }
+
+        $posts = $posts->paginate(12);
+        $categs = DB::table('categories')->get();
+
+        $pageData = ['title' => 'Fotografias', 'smenu' => '23', 'bg' => 'img/publish-bg.jpg'];
+
+        return view('web.gallery', compact('pageData','posts','categs'));
 
     }
 
@@ -53,7 +108,7 @@ class PageController extends Controller
 
     public function detail($slug)
     {
-        $pageData = ['title' => 'Publicação - Detalhe', 'smenu' => '21', 'bg' => 'img/post-bg.jpg'];
+        $pageData = ['title' => 'Detalhe', 'smenu' => '21', 'bg' => 'img/post-bg.jpg'];
 
         $post = Post::where('slug', $slug)->first();
 
@@ -80,9 +135,9 @@ class PageController extends Controller
     }
 
 
-    public function project() {
-        $pageData = ['title' => 'Projeto', 'smenu' => '3', 'bg' => 'img/project-bg.jpg'];
-        return view('web.project', compact('pageData'));
+    public function terms() {
+        $pageData = ['title' => 'Termos', 'smenu' => '3', 'bg' => 'img/project-bg.jpg'];
+        return view('web.terms', compact('pageData'));
     }
 
     public function published() {

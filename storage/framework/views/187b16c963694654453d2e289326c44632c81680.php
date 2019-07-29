@@ -1,9 +1,6 @@
-@extends('layouts.main')
-
-{{--Section Head--}}
-@section('head')
-    {{-- Another scripts and styles in head--}}
-    <link rel="stylesheet" href="{{asset('vendor/juxtapose/css/juxtapose.css')}}">
+<?php $__env->startSection('head'); ?>
+    
+    <link rel="stylesheet" href="<?php echo e(asset('vendor/juxtapose/css/juxtapose.css')); ?>">
     <style>
 
         .juxtapose {
@@ -12,13 +9,13 @@
 
     </style>
 
-@endsection
+<?php $__env->stopSection(); ?>
 
-{{--Section footer--}}
-@section('content')
-    {{-- conteiner body --}}
 
-    {{-- Preloader --}}
+<?php $__env->startSection('content'); ?>
+    
+
+    
     <div class="preloader">
         <div class="ring">
             Carregando
@@ -80,7 +77,7 @@
             <h3 class="heading">Ferramentas de Apoio</h3>
             <div class="heading-underline"></div>
             <p>Com a ajuda da ferramenta de comparação, podemos ver as fotografias com repetição, sobrepondo uma a outra, assim podemos analisar a imagem principal e a foto repetida com mais detalhes.</p>
-            <a class="btn btn-primary" href="{{route('home')}}">ver mais!</a>
+            <a class="btn btn-primary" href="<?php echo e(route('home')); ?>">ver mais!</a>
         </div>
         </div>
     </div>
@@ -97,7 +94,7 @@
                     <h3 class="heading">Um contributo importante</h3>
                     <div class="heading-underline"></div>
                     <p class="lead">Envie suas fotos, partilhe com pessoas, grupos de investigação e outros interessados na pesquisas sobre mudanças climáticas, vegetação, paisagismo, etc.!</p>
-                    <a class="btn btn-primary btn-sm" href="{{route('adminposts.index')}}" target="_blank">Enviar fotografias</a>
+                    <a class="btn btn-primary btn-sm" href="<?php echo e(route('adminposts.index')); ?>" target="_blank">Enviar fotografias</a>
                 </div>
             </div>
 
@@ -109,13 +106,13 @@
 
 
 
-@endsection
+<?php $__env->stopSection(); ?>
 
-{{--Section footer--}}
-@section('footer')
 
-    {{-- Another scripts and styles in footer --}}
-    <script src="{{asset('vendor/juxtapose/js/juxtapose.js')}}"></script>
+<?php $__env->startSection('footer'); ?>
+
+    
+    <script src="<?php echo e(asset('vendor/juxtapose/js/juxtapose.js')); ?>"></script>
 
     <script type="text/javascript">
         $(window).on('load', function () {
@@ -123,5 +120,7 @@
         })
     </script>
 
-@endsection
+<?php $__env->stopSection(); ?>
 
+
+<?php echo $__env->make('layouts.main', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\laragon\www\final_alpha\resources\views/web/home.blade.php ENDPATH**/ ?>

@@ -19,14 +19,15 @@ Route::redirect('/','home');
 Route::get('/home', 'Web\PageController@home')->name('home');
 Route::get('/publications', 'Web\PageController@publications')->name('publications');
 Route::get('/publications/{slug}', 'Web\PageController@detail')->name('detail');
-Route::get('/project', 'Web\PageController@project')->name('project');
+Route::get('/terms', 'Web\PageController@terms')->name('terms');
 Route::get('/contacts', 'Web\PageController@contacts')->name('contacts');
 
 Route::get('/category/{slug}', 'Web\PageController@category')->name('category');
 Route::get('/tag/{slug}', 'Web\PageController@tag')->name('tag');
 
 Route::get('/gallery', 'Web\PageController@gallery')->name('gallery');
-
+Route::get('/gallery/simple', 'Web\PageController@simple')->name('simple_search');
+Route::get('/gallery/advance', 'Web\PageController@advance')->name('advance_search');
 
 /* Rota de teste */
 Route::get('/admin/teste', 'Admin\AdminController@teste');
