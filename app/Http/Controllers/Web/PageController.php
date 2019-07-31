@@ -41,17 +41,17 @@ class PageController extends Controller
     public function gallery() {
 
         $posts = Post::orderBy('id','DESC')->where('status','PUBLISHED')->paginate( 12);
-        $categs = DB::table('categories')->get();
+        $categs = Category::orderBy('name','ASC')->pluck('name','id');
+        $tags = Tag::orderBy('name','ASC')->pluck('name','id');
 
         $pageData = ['title' => 'Fotografias', 'smenu' => '23', 'bg' => 'img/publish-bg.jpg'];
 
-        return view('web.gallery', compact('pageData','posts','categs') );
+        return view('web.gallery', compact('pageData','posts','categs','tags') );
 
     }
 
-    public function simple(Request $request)
+    public function simple(Request $request) {
 
-    {
 
         $posts = Post::orderBy('id','DESC')->where('status','PUBLISHED');
 
@@ -61,19 +61,54 @@ class PageController extends Controller
 
         $posts = $posts->paginate(12);
 
-        $categs = DB::table('categories')->get();
+        $categs = Category::orderBy('name','ASC')->pluck('name','id');
 
+
+        $tags = Tag::orderBy('name','ASC')->pluck('name','id');
         $pageData = ['title' => 'Fotografias', 'smenu' => '23', 'bg' => 'img/publish-bg.jpg'];
 
-        return view('web.gallery', compact('pageData','posts','categs'));
+        return view('web.gallery', compact('pageData','posts','categs','tags'));
 
     }
+
+    public function author(Request $request) {
+
+
+        $posts = Post::orderBy('id','DESC')->where('status','PUBLISHED');
+
+
+        if( $request->input('search')){
+            $user = User::where('name', 'LIKE', "%" . $request->search . "%")->first();
+            $posts = $posts->where('user_id', $user->id);
+
+        }
+
+
+        $posts = $posts->paginate(12);
+
+        $categs = Category::orderBy('name','ASC')->pluck('name','id');
+        $tags = Tag::orderBy('name','ASC')->pluck('name','id');
+        $pageData = ['title' => 'Fotografias', 'smenu' => '23', 'bg' => 'img/publish-bg.jpg'];
+
+        return view('web.gallery', compact('pageData','posts','categs','tags'));
+
+    }
+
 
     public function advance(Request $request)
 
     {
 
+
         $posts = Post::orderBy('id','DESC')->where('status','PUBLISHED');
+
+        $tagId = $request->tag;
+        $slug = Tag::where('id', $tagId)->pluck('slug');
+        if($tagId){
+            $posts = Post::whereHas('tags', function($query) use ($slug) {
+                     $query->where('slug', $slug);
+                })->orderBy('id','DESC')->where('status','PUBLISHED');
+        }
 
         if( $request->name){
 
@@ -81,26 +116,32 @@ class PageController extends Controller
 
         }
 
-        if( $request->author){
+        if( $request->category_id){
 
-            //$posts = $posts->where('users.name', 'LIKE', "%" . $request->author . "%");
+            $posts = $posts->where('category_id', $request->category_id );
 
         }
 
-        if( $request->min_age && $request->max_age ){
 
-            $posts = $posts->where('created', '>=', $request->min_age)
 
-                ->where('created', '<=', $request->max_age);
+        $dataInicio = $request->dataInicio;
+        $dataFim = $request->dataFim;
+
+        if( $dataInicio && $dataFim){
+
+           $posts = $posts->where('created', '>=', $dataInicio)
+            ->where('created', '<=',$dataFim);
 
         }
 
         $posts = $posts->paginate(12);
-        $categs = DB::table('categories')->get();
+        $categs = Category::orderBy('name','ASC')->pluck('name','id');
+
+        $tags = Tag::orderBy('name','ASC')->pluck('name','id');
 
         $pageData = ['title' => 'Fotografias', 'smenu' => '23', 'bg' => 'img/publish-bg.jpg'];
 
-        return view('web.gallery', compact('pageData','posts','categs'));
+        return view('web.gallery', compact('pageData','posts','categs','tags'));
 
     }
 

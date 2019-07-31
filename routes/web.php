@@ -28,6 +28,7 @@ Route::get('/tag/{slug}', 'Web\PageController@tag')->name('tag');
 Route::get('/gallery', 'Web\PageController@gallery')->name('gallery');
 Route::get('/gallery/simple', 'Web\PageController@simple')->name('simple_search');
 Route::get('/gallery/advance', 'Web\PageController@advance')->name('advance_search');
+Route::get('/gallery/author', 'Web\PageController@author')->name('author_search');
 
 /* Rota de teste */
 Route::get('/admin/teste', 'Admin\AdminController@teste');

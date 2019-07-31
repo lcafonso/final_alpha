@@ -180,6 +180,32 @@
 
         }
 
+        .advancedSearch{
+            position: relative;
+            width: 100%;
+            height: 350px;
+            background-color: rgba(0, 0, 0, 0.5);
+            top: -50px;
+            display: none;
+        }
+
+
+
+        .nav-tabs .nav-link.active,
+        .nav-tabs .nav-item.show .nav-link {
+
+            color: #FFFFFF;
+
+            background-color: #2399FB;
+
+            border-color: #dee2e6 #dee2e6 #fff;
+
+        }
+
+        .space {
+            display:inline-block;
+            margin-left: 40px;
+        }
 
     </style>
 
@@ -190,6 +216,59 @@
 
 <?php $__env->startSection('content'); ?>
 
+    <div class="advancedSearch" id="foo">
+        
+        <div class="container" >
+            <ul class="nav nav-tabs " role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#fotografia" role="tab">Fotografia</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#pessoa" role="tab">Pessoa</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#grupo" role="tab">Grupo</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#album" role="tab">Album</a>
+                </li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div class="tab-pane active" id="fotografia" role="tabpanel">
+                    
+                    <?php echo Form::open(['route' => 'advance_search', 'method' => 'get']); ?>
+
+                    <?php echo $__env->make('web._advform', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                    <?php echo Form::close(); ?>
+
+
+
+                </div>
+                <div class="tab-pane" id="pessoa" role="tabpanel">
+                    
+                    <?php echo Form::open(['route' => 'author_search', 'method' => 'get']); ?>
+
+                    <?php echo $__env->make('web._authorform', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                    <?php echo Form::close(); ?>
+
+                </div>
+
+                <div class="tab-pane" id="grupo" role="tabpanel">
+                    
+                    <p style="color: #FFFFFF">Ainda nao implementado, desculpe o transtorno!</p>
+                </div>
+                <div class="tab-pane" id="albun" role="tabpanel">
+                    
+                    <p style="color: #FFFFFF"> Ainda nao implementado, desculpe o transtorno!</p>
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
 
 
     <div class="row">
@@ -247,6 +326,30 @@
 <?php $__env->startSection('footer'); ?>
 
 
+
+    <script type="text/javascript">
+        <!--
+        function toggle_visibility(id) {
+            var e = document.getElementById(id);
+            if(e.style.display == 'block')
+                e.style.display = 'none';
+            else
+                e.style.display = 'block';
+        }
+        //-->
+
+        function today() {
+            let d = new Date();
+            let currDate = d.getDate();
+            let currMonth = d.getMonth()+1;
+            let currYear = d.getFullYear();
+            return currYear + "-" + ((currMonth<10) ? '0'+currMonth : currMonth )+ "-" + ((currDate<10) ? '0'+currDate : currDate );
+        }
+
+        document.getElementById('dataInicio').value = "2019-01-02";
+        document.getElementById('dataFim').value = today();
+
+    </script>
 
 <?php $__env->stopSection(); ?>
 

@@ -21,6 +21,7 @@
 
 
 
+
             {{--  Informação e erros  --}}
             @if (session('info'))
                 <div class="container">
