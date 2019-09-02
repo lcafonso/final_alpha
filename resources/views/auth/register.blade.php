@@ -1,4 +1,25 @@
-@extends('layouts.app')
+@extends('layouts.extra')
+
+@section('head')
+    <style>
+        .card{
+            margin-left: auto;
+            margin-right: auto;
+            position: absolute;
+            max-width: 540px;
+            width: calc(100% - 40px);
+            padding: 14px;
+            background-color: rgba(255,255,255,.8);
+            -webkit-box-shadow: 0 2px 6px rgba(0,0,0,.2);
+            -moz-box-shadow: 0 2px 6px rgba(0,0,0,.2);
+            box-shadow: 0 2px 6px rgba(0,0,0,.2);
+            min-width: 520px;
+            min-height: 338px;
+            overflow: hidden;
+        }
+    </style>
+
+@endsection
 
 @section('content')
 <div class="container">

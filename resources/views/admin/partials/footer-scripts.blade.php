@@ -3,11 +3,11 @@
 <script src="{{asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 
 <!-- Custom scripts for this template -->
-<script src="{{asset('js/clean-blog.min.js')}}"></script>
+{{--<script src="{{asset('js/clean-blog.min.js')}}"></script>--}}
 
 <script src="{{asset('js/custom.js')}}"></script>
 
-<script>
+{{--<script>
 
     $(function() {
         $(window).scroll(function(){
@@ -21,7 +21,7 @@
     });
 
 
-</script>
+</script>--}}
 
 <!-- Menu Toggle Script -->
 <script>

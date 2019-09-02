@@ -176,6 +176,18 @@ class PageController extends Controller
     }
 
 
+    public function credits()
+    {
+        $pageData = ['title' => 'Creditos', 'smenu' => '21', 'bg' => 'img/post-bg.jpg'];
+
+        return view('web.credits',compact('pageData'));
+    }
+
+    public function policy() {
+        $pageData = ['title' => 'Politica de Privacidade', 'smenu' => '31', 'bg' => 'img/project-bg.jpg'];
+        return view('web.terms', compact('pageData'));
+    }
+
     public function terms() {
         $pageData = ['title' => 'Termos', 'smenu' => '3', 'bg' => 'img/project-bg.jpg'];
         return view('web.terms', compact('pageData'));

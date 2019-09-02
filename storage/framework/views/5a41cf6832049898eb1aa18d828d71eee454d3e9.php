@@ -8,7 +8,7 @@
                 <div class="row">
                     <div class="col-md-6 ">
                         <div class="logo-part">
-                            <img src="{{asset('img/2018CIMOBranco.png')}}" class="logo-footer"  >
+                            <img src="<?php echo e(asset('img/2018CIMOBranco.png')); ?>" class="logo-footer"  >
                             <p>Centro de Investigação de Montanha
                                 <br>Campus Santa Apolónia
                                 <br>5300-253 Bragança
@@ -32,17 +32,17 @@
                         <div class="row ">
                             <div class="col-md-6">
                                 <ul>
-                                    <li> <a href="{{ route('home') }}"> Home</a> </li>
-                                    <li> <a href="{{ route('publications') }}"> Fotografias</a> </li>
-                                    <li> <a href="{{ route('contacts') }}"> Nossos contactos</a></li>
+                                    <li> <a href="<?php echo e(route('home')); ?>"> Home</a> </li>
+                                    <li> <a href="<?php echo e(route('publications')); ?>"> Fotografias</a> </li>
+                                    <li> <a href="<?php echo e(route('contacts')); ?>"> Nossos contactos</a></li>
                                 </ul>
                             </div>
                             <div class="col-md-6 px-4">
                                 <ul>
 
-                                    <li> <a href="{{ route('terms') }}"> Termos</a> </li>
-                                    <li> <a href="{{ route('policy') }}"> Politica</a> </li>
-                                    <li> <a href="{{ route('credits') }}"> Creditos</a> </li>
+                                    <li> <a href="<?php echo e(route('terms')); ?>"> Termos</a> </li>
+                                    <li> <a href="<?php echo e(route('policy')); ?>"> Politica</a> </li>
+                                    <li> <a href="<?php echo e(route('credits')); ?>"> Creditos</a> </li>
 
                                 </ul>
                             </div>
@@ -51,8 +51,8 @@
                     <div class="col-md-6 ">
                         <h6> Newsletter</h6>
                         <div class="social">
-                            <a href="#"><img src="{{asset('img/facebook-logo.svg')}}" alt="" style="max-height: 50px;"></a>
-                            <a href="#"><img src="{{asset('img/linkedin-logo.svg')}}" alt="" style="max-height: 50px;"></a>
+                            <a href="#"><img src="<?php echo e(asset('img/facebook-logo.svg')); ?>" alt="" style="max-height: 50px;"></a>
+                            <a href="#"><img src="<?php echo e(asset('img/linkedin-logo.svg')); ?>" alt="" style="max-height: 50px;"></a>
                         </div>
 
                         <p>That's technology limitation of LCD monitors</p>
@@ -70,3 +70,4 @@
     <p>Copyright &copy; 2019 <a href="#" style="color: grey">Luis CM Afonso</a>. All rights reserved.</p>
 
 </footer>
+<?php /**PATH D:\laragon\www\final_alpha\resources\views/layouts/partials/footer.blade.php ENDPATH**/ ?>

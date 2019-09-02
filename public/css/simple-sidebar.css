@@ -7,6 +7,20 @@ body {
   overflow-x: hidden;
 }
 
+/* Main content */
+.main {
+    margin-top: 60px !important; /* Add a top margin to avoid content overlay */
+}
+
+#wrapper {
+    padding-left: 0;
+    min-height: 100vh;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
 #sidebar-wrapper {
   min-height: 100vh;
   margin-left: -15rem;
@@ -32,6 +46,42 @@ body {
 #wrapper.toggled #sidebar-wrapper {
   margin-left: 0;
 }
+
+#wrapper.right-toggled {
+    padding-right: 250px;
+}
+
+#right-sidebar-wrapper {
+    z-index: 1000;
+    position: fixed;
+    right: 250px;
+    width: 0;
+    height: 100%;
+    margin-right: -250px;
+    overflow-y: auto;
+    background: #000;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#wrapper.right-toggled #right-sidebar-wrapper {
+    width: 450px;
+}
+
+#wrapper.right-toggled #page-content-wrapper {
+    position: absolute;
+}
+
+
+#right-menu-toggle {
+    position: absolute;
+    right:0;
+    bottom: 0;
+    z-index: 1001
+}
+
 
 @media (min-width: 768px) {
   #sidebar-wrapper {

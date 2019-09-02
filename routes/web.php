@@ -20,7 +20,10 @@ Route::get('/home', 'Web\PageController@home')->name('home');
 Route::get('/publications', 'Web\PageController@publications')->name('publications');
 Route::get('/publications/{slug}', 'Web\PageController@detail')->name('detail');
 Route::get('/terms', 'Web\PageController@terms')->name('terms');
+Route::get('/policy', 'Web\PageController@policy')->name('policy');
 Route::get('/contacts', 'Web\PageController@contacts')->name('contacts');
+Route::get('/credits', 'Web\PageController@credits')->name('credits');
+
 
 Route::get('/category/{slug}', 'Web\PageController@category')->name('category');
 Route::get('/tag/{slug}', 'Web\PageController@tag')->name('tag');
@@ -32,7 +35,7 @@ Route::get('/gallery/author', 'Web\PageController@author')->name('author_search'
 
 /* Rota de teste */
 Route::get('/admin/teste', 'Admin\AdminController@teste');
-
+Route::get('/admin/teste2', 'Admin\AdminController@teste2')->name('teste2');
 
 
 /* Rota para gerar o pdf */

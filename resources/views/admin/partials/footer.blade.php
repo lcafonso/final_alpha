@@ -1,5 +1,6 @@
 
 <!-- Footer -->
+<br>
 <footer class="container-fluid bg-grey py-5">
     <div class="container">
         <div class="row">
@@ -7,7 +8,7 @@
                 <div class="row">
                     <div class="col-md-6 ">
                         <div class="logo-part">
-                            <img src="{{asset('img/ipb_cimo.svg')}}" class="logo-footer" >
+                            <img src="{{asset('img/2018CIMOBranco.png')}}" class="logo-footer"  >
                             <p>Centro de Investigação de Montanha
                                 <br>Campus Santa Apolónia
                                 <br>5300-253 Bragança
@@ -19,8 +20,8 @@
                     <div class="col-md-6 px-4">
                         <h6> O CIMO</h6>
                         <p>Mais informações podem ser vistas diretamente na pagina.</p>
-                        <a href="#" class="btn-footer"> Ir para CIMO </a><br>
-                        <a href="#" class="btn-footer"> Contactos </a>
+                        <a href="https://cimo.ipb.pt/web/" target="_blank" class="btn-footer"> Ir para CIMO </a><br>
+                        <a href="https://cimo.ipb.pt/web/index.php?r=site/contact" target="_blank" class="btn-footer"> Contactos </a>
                     </div>
                 </div>
             </div>
@@ -31,17 +32,15 @@
                         <div class="row ">
                             <div class="col-md-6">
                                 <ul>
-                                    <li> <a href="#"> Home</a> </li>
-                                    <li> <a href="#"> Projeto</a> </li>
-                                    <li> <a href="#"> Publicar</a> </li>
-                                    <li> <a href="#"> Contact</a> </li>
+                                    <li> <a href="{{ route('home') }}"> Home</a> </li>
+                                    <li> <a href="{{ route('publications') }}"> Fotografias</a> </li>
+                                    <li> <a href="{{ route('contacts') }}"> Nossos contactos</a></li>
                                 </ul>
                             </div>
                             <div class="col-md-6 px-4">
                                 <ul>
-                                    <li> <a href="#"> Cab Faciliy</a> </li>
-                                    <li> <a href="#"> Fax</a> </li>
-                                    <li> <a href="#"> Termos</a> </li>
+
+                                    <li> <a href="{{ route('terms') }}"> Termos</a> </li>
                                     <li> <a href="#"> Politica</a> </li>
 
                                 </ul>

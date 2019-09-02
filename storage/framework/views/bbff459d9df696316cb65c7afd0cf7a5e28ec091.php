@@ -1,8 +1,5 @@
-@extends('admin.normal')
-
-{{--Section Head--}}
-@section('head')
-    {{-- Another scripts and styles in head--}}
+<?php $__env->startSection('head'); ?>
+    
     <style>
         p {
             font-family: 'Poppins', sans-serif;
@@ -182,15 +179,15 @@
 
 
 
-@endsection
+<?php $__env->stopSection(); ?>
 
 
 
 
 
-{{--Section footer--}}
-@section('content')
-    {{-- conteiner body --}}
+
+<?php $__env->startSection('content'); ?>
+    
     <div class="wrapper">
         <!-- Sidebar  -->
         <nav id="sidebar">
@@ -302,15 +299,15 @@
         </div>
     </div>
 
-@endsection
+<?php $__env->stopSection(); ?>
 
 
 
 
-{{--Section footer--}}
-@section('footer')
 
-    {{-- Another scripts and styles in footer --}}
+<?php $__env->startSection('footer'); ?>
+
+    
     <script type="text/javascript">
         $(document).ready(function () {
             $('#sidebarCollapse').on('click', function () {
@@ -319,5 +316,7 @@
         });
     </script>
 
-@endsection
+<?php $__env->stopSection(); ?>
 
+
+<?php echo $__env->make('admin.normal', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\laragon\www\final_alpha\resources\views/admin/posts/show.blade.php ENDPATH**/ ?>

@@ -33,8 +33,21 @@ class AdminController extends Controller
 
         $place = [];
         $pageData = ['title' => 'Administração - Teste', 'smenu' => '', 'bg' => ''];
+
+
         return view('admin.main.teste2', compact('pageData','districts','place') );
+
     }
+
+    public function teste2()
+    {
+
+
+        return view('admin.posts.show');
+
+    }
+
+
 
     public function getStateList(Request $request)
     {

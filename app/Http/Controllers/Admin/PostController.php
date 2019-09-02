@@ -116,7 +116,7 @@ class PostController extends Controller
         $post->tags()->attach($request->get('tags'));
 
 
-        
+
         //Detalhes
         $detail = new Detail;
 
@@ -163,7 +163,7 @@ class PostController extends Controller
             ->paginate();
 
 
-
+        /*return view('admin.posts.show', compact('post', 'tech','posts'));*/
         return view('admin.posts.show', compact('post', 'tech','posts'));
 }
 

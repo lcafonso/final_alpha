@@ -12,9 +12,15 @@
 
 <div class="d-flex" id="wrapper">
 
+    <!-- Page Sidebar -->
     @include('admin.partials.sidebar')
+
+
+
+
     <!-- Page Content -->
     <div id="page-content-wrapper">
+
         @include('admin.partials.nav')
 
         @if (session('info'))

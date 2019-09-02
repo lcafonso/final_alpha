@@ -14,46 +14,48 @@
             <li class="nav-item dropdown">
 
                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                    <img src="{{ asset(Auth::user()->profile->file) }}" style="width:40px; height:40px; position:absolute; top:0px; left:-35px; border-radius:50%">
-                    {{ Auth::user()->name }} <span class="caret"></span>
+                    <img src="<?php echo e(asset(Auth::user()->profile->file)); ?>" style="width:40px; height:40px; position:absolute; top:0px; left:-35px; border-radius:50%">
+                    <?php echo e(Auth::user()->name); ?> <span class="caret"></span>
                 </a>
 
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                    @if ( Auth::user()->profile->role_id == 1  )
-                        <a class="dropdown-item" href="{{ route('admin.index') }}">
+                    <?php if( Auth::user()->profile->role_id == 1  ): ?>
+                        <a class="dropdown-item" href="<?php echo e(route('admin.index')); ?>">
                             <i class="fas fa-tachometer-alt"></i>
                             Dashboard
                         </a>
-                    @endif
-                    <a class="dropdown-item" href="{{ route('adminprofile.index') }}">
+                    <?php endif; ?>
+                    <a class="dropdown-item" href="<?php echo e(route('adminprofile.index')); ?>">
                         <i class="far fa-address-card">  </i>
                         Profile
                     </a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="{{ route('logout') }}"
+                    <a class="dropdown-item" href="<?php echo e(route('logout')); ?>"
                        onclick="event.preventDefault();
                        document.getElementById('logout-form').submit();">
                         <i class="fas fa-power-off">  </i>
-                        {{ __('Logout') }}
+                        <?php echo e(__('Logout')); ?>
+
                     </a>
 
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        @csrf
+                    <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST" style="display: none;">
+                        <?php echo csrf_field(); ?>
                     </form>
                 </div>
 
 
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="{{route('admin.index')}}">
+                <a class="nav-link" href="<?php echo e(route('admin.index')); ?>">
                     Dashboard <span class="sr-only">(current)</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ url('/') }}">
+                <a class="nav-link" href="<?php echo e(url('/')); ?>">
                     Home
                 </a>
             </li>
         </ul>
     </div>
 </nav>
+<?php /**PATH D:\laragon\www\final_alpha\resources\views/admin/partials/nav.blade.php ENDPATH**/ ?>

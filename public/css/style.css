@@ -442,6 +442,8 @@ header.masthead .post-heading .meta a {
 .logo-footer {
     margin-bottom: 40px;
     width: 210px;
+    opacity: 0.5;
+    filter: alpha(opacity=50)
 }
 footer {
     color: grey;
