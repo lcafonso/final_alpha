@@ -33,6 +33,9 @@ class UserController extends Controller
      */
     public function index()
     {
+
+
+
         $user = Auth::user();
         $role = Role::find($user->profile->role_id);
 
@@ -49,7 +52,12 @@ class UserController extends Controller
             ->where('user_id', auth()->user()->id)
             ->paginate(8);
 
-        return view('admin.profile.index',compact('user','pageData','role','numberOfPosts','posts'));
+        $followers = $user->followers;
+        $followings = $user->followings;
+
+
+
+        return view('admin.profile.index',compact('user','pageData','role','numberOfPosts','posts','followers' , 'followings'));
     }
 
     /**
@@ -142,7 +150,7 @@ class UserController extends Controller
             'password'   => (!empty($request->get('password'))?$request->get('password'):$user->password),
         ])->save();
 
-        console.log('aqui esta');
+
 
         $profile = Profile::where('user_id',$id);
 
@@ -197,7 +205,10 @@ class UserController extends Controller
         $posts = Post::where('status','PUBLISHED')
             ->where('user_id', auth()->user()->id);
 
-        return view('admin.profile.profile',compact('user','pageData','role','numberOfPosts','posts'));
+        $followers = $user->followers;
+        $followings = $user->followings;
+
+        return view('admin.profile.profile',compact('user','pageData','role','numberOfPosts','posts','followers' , 'followings'));
     }
 
 

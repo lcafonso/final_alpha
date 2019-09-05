@@ -273,13 +273,14 @@
 
                                     <div class="stats-container">
                                         <div class="stats">
-                                            <h4>235</h4>
+
+                                            <h4>{{$followers->count()}}</h4>
                                             <p>
                                                 Followers
                                             </p>
                                         </div>
                                         <div class="stats">
-                                            <h4>114</h4>
+                                            <h4>{{$followings->count()}}</h4>
                                             <p>
                                                 Following
                                             </p>
@@ -291,6 +292,23 @@
                                             </p>
                                         </div>
                                     </div>
+                                    <hr>
+
+                                    @if(Auth::user()->id !=  $user->id )
+                                        <div class="col text-center">
+                                            @if(!$isFollow)
+                                                {!! Form::open(['route' => ['user.follow', $user->id], 'method' => 'POST']) !!}
+                                                <button class="btn badge badge-pill badge-primary"> seguir </button>
+                                                {!! Form::close() !!}
+                                            @else
+                                                {!! Form::open(['route' => ['user.unfollow', $user->id], 'method' => 'POST']) !!}
+                                                <button class="btn badge badge-pill badge-secondary"> seguindo </button>
+                                                {!! Form::close() !!}
+                                            @endif
+                                        </div>
+                                    @endif
+
+
 
                                 </div>
                             </div>
@@ -448,6 +466,16 @@
     <script>
         $(document).ready(function()
         {
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+
+            });
+
+
+
             $('img').bind('contextmenu', function(e){
                 console.log('teste');
                 return false;

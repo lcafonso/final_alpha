@@ -47,6 +47,12 @@ Route::post('/admin/profile', 'Admin\UserController@update_avatar');
 
 
 
+Route::post('profile/{profileId}/follow', 'Admin\ProfileController@followUser')->name('user.follow');
+Route::post('/{profileId}/unfollow', 'Admin\ProfileController@unFollowUser')->name('user.unfollow');
+
+
+
+
 Auth::routes();
 
 /* Admin */

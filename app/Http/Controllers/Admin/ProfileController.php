@@ -65,7 +65,11 @@ class ProfileController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::find($id);
+        $followers = $user->followers;
+        $followings = $user->followings;
+
+        return view('user.show', compact('user', 'followers' , 'followings') );
     }
 
     /**
@@ -102,5 +106,37 @@ class ProfileController extends Controller
         //
     }
 
+
+    /**
+     * Follow the user.
+     *
+     * @param $profileId
+     *
+     */
+    public function followUser(int $profileId)
+    {
+        $user = User::find($profileId);
+        if(! $user) {
+            return back()->with('info', 'User does not exist.');
+        }
+        $user->followers()->attach(auth()->user()->id);
+        return back()->with('info', 'Successfully followed the user.');
+    }
+
+    /**
+     * Follow the user.
+     *
+     * @param $profileId
+     *
+     */
+    public function unFollowUser(int $profileId)
+    {
+        $user = User::find($profileId);
+        if(! $user) {
+            return back()->with('info', 'User does not exist.');
+        }
+        $user->followers()->detach(auth()->user()->id);
+        return back()->with('info', 'Successfully unfollowed the user.');
+    }
 
 }

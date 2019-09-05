@@ -32,10 +32,10 @@
                         <a href="" data-target="#publicacoes" data-toggle="tab" class="nav-link">Publicações</a>
                     </li>
                     <li class="nav-item">
-                        <a href="" data-target="#grupos" data-toggle="tab" class="nav-link">Grupos</a>
+                        <a href="" data-target="#seguidores" data-toggle="tab" class="nav-link">Seguidores</a>
                     </li>
                     <li class="nav-item">
-                        <a href="" data-target="#albuns" data-toggle="tab" class="nav-link">Albuns</a>
+                        <a href="" data-target="#seguindo" data-toggle="tab" class="nav-link">Seguindo</a>
                     </li>
                 </ul>
                 <div class="tab-content py-4">
@@ -132,16 +132,30 @@
                         </div>
 
                     </div>
-                    <div class="tab-pane" id="grupos">
-                        grupos
-
-                        em implementação
+                    <div class="tab-pane" id="seguidores">
+                        @foreach ($followers as $follower)
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6>Nome Completo</h6>
+                                    <p>
+                                        {{$follower->name}}
+                                    </p>
+                                </div>
+                            </div>
+                        @endforeach
 
                     </div>
-                    <div class="tab-pane" id="albuns">
-                        coleções
-
-                        em implementação
+                    <div class="tab-pane" id="seguindo">
+                        @foreach ($followings as $following)
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6>Nome Completo</h6>
+                                    <p>
+                                        {{$following->name}}
+                                    </p>
+                                </div>
+                            </div>
+                        @endforeach
                     </div>
 
                 </div>

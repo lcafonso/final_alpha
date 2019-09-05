@@ -7,6 +7,8 @@ use App\Tag;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+
 
 use App\User;
 use App\Post;
@@ -171,8 +173,17 @@ class PageController extends Controller
 
         $numberOfPosts = [ "total" => $total, "publicadas" => $publicadas ] ;
 
+        $followers = $user->followers;
+        $followings = $user->followings;
 
-        return view('web.detail-post',compact('post','posts','pageData','user','role','tags', 'numberOfPosts'));
+
+        $me = Auth::user()->id;
+
+        $isFollow = $followers->contains($me);
+
+
+
+        return view('web.detail-post',compact('post','posts','pageData','user','role','tags', 'numberOfPosts','followers' , 'followings', 'isFollow'));
     }
 
 
