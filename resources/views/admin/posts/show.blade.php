@@ -4,180 +4,92 @@
 @section('head')
     {{-- Another scripts and styles in head--}}
     <style>
-        p {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.1em;
-            font-weight: 300;
-            line-height: 1.7em;
-            color: #999;
+        @font-face{font-family:'Glyphicons Halflings';src:url('https://netdna.bootstrapcdn.com/bootstrap/3.0.0/fonts/glyphicons-halflings-regular.eot');src:url('https://netdna.bootstrapcdn.com/bootstrap/3.0.0/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'),url('https://netdna.bootstrapcdn.com/bootstrap/3.0.0/fonts/glyphicons-halflings-regular.woff') format('woff'),url('https://netdna.bootstrapcdn.com/bootstrap/3.0.0/fonts/glyphicons-halflings-regular.ttf') format('truetype'),url('https://netdna.bootstrapcdn.com/bootstrap/3.0.0/fonts/glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg');}.glyphicon{position:relative;top:1px;display:inline-block;font-family:'Glyphicons Halflings';font-style:normal;font-weight:normal;line-height:1;-webkit-font-smoothing:antialiased;}
+
+        .content-section {
+            background-color: #000000;
+            min-height: 940px;
+            border: solid 1px #f1ae00;
         }
 
-        a,
-        a:hover,
-        a:focus {
-            color: inherit;
-            text-decoration: none;
-            transition: all 0.3s;
-        }
-
-        .navbar {
-            padding: 15px 10px;
-            background: #fff;
-            border: none;
-            border-radius: 0;
-            margin-bottom: 05px;
-            box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
-        }
-
-        .navbar-btn {
-            box-shadow: none;
-            outline: none !important;
-            border: none;
-        }
-
-        .line {
-            width: 100%;
-            height: 1px;
-            border-bottom: 1px dashed #ddd;
-            margin: 40px 0;
-        }
-
-        /* ---------------------------------------------------
-            SIDEBAR STYLE
-        ----------------------------------------------------- */
-
-        .wrapper {
-            display: flex;
-            width: 100%;
-            align-items: stretch;
-        }
-
-        #sidebar {
-            min-width: 250px;
-            max-width: 250px;
-            background: #7386D5;
-            color: #fff;
-            transition: all 0.3s;
-        }
-
-        #sidebar.active {
-            margin-left: -250px;
-        }
-
-        #sidebar .sidebar-header {
-            padding: 20px;
-            background: #6d7fcc;
-        }
-
-        #sidebar ul.components {
-            padding: 20px 0;
-            border-bottom: 1px solid #47748b;
-        }
-
-        #sidebar ul p {
-            color: #fff;
-            padding: 10px;
-        }
-
-        #sidebar ul li a {
-            padding: 10px;
-            font-size: 1.1em;
-            display: block;
-        }
-
-        #sidebar ul li a:hover {
-            color: #7386D5;
-            background: #fff;
-        }
-
-        #sidebar ul li.active>a,
-        a[aria-expanded="true"] {
-            color: #fff;
-            background: #6d7fcc;
-        }
-
-        a[data-toggle="collapse"] {
-            position: relative;
-        }
-
-        .dropdown-toggle::after {
-            display: block;
+        .sidebar-section {
             position: absolute;
-            top: 50%;
-            right: 20px;
-            transform: translateY(-50%);
+            background-color: #fff;
+            min-height: 940px;
+            height: auto;
+            width: 100%;
+            margin: 10px -15px auto;
+
         }
 
-        ul ul a {
-            font-size: 0.9em !important;
-            padding-left: 30px !important;
-            background: #6d7fcc;
-        }
 
-        ul.CTAs {
-            padding: 20px;
-        }
-
-        ul.CTAs a {
+        .sidebar-item {
+            width: 100%;
+            height: 100%;
             text-align: center;
-            font-size: 0.9em !important;
-            display: block;
-            border-radius: 5px;
-            margin-bottom: 5px;
+
+
         }
 
-        a.download {
+        .sidebar-item h3 {
+            background: #eeeeee;
+            max-width: 100%;
+
+            border-bottom: solid 1px #00ff2c;
+        }
+
+        .make-me-sticky {
+            position: -webkit-sticky;
+            position: sticky;
+            top: 0;
+        }
+
+
+
+        /* Ignore This, just coloring */
+        body {
             background: #fff;
-            color: #7386D5;
         }
 
-        a.article,
-        a.article:hover {
-            background: #6d7fcc !important;
-            color: #fff !important;
+        article {
+            background: #ffffff;
         }
 
-        /* ---------------------------------------------------
-             DIVBAR STYLE
-        ----------------------------------------------------- */
-        .divbar {
-            position: absolute;
-            min-height: 100%;
-            height:auto !important;
-            height: 100hv;
-            right: 0;
-            width: 260px;
-
-            background-color: grey;
+        /* Icon when the collapsible content is shown */
+        .btn:after {
+            font-family: "Glyphicons Halflings";
+            content: "\e114";
+            float: right;
+            margin-left: 15px;
+        }
+        /* Icon when the collapsible content is hidden */
+        .btn.collapsed:after {
+            content: "\e080";
         }
 
-
-        /* ---------------------------------------------------
-            CONTENT STYLE
-        ----------------------------------------------------- */
-
-        #content {
+        .cir-responsive {
+            float: left;
             width: 100%;
-            padding: 20px;
-            min-height: 100vh;
-            transition: all 0.3s;
+            height: 100%;
+            max-width: 60px;
+            max-height: 60px;
+            object-fit: cover;
+            border-radius: 50%;
+            overflow: auto;
+            margin-right: 10px;
+            z-index: -1;
+
         }
 
-        /* ---------------------------------------------------
-            MEDIAQUERIES
-        ----------------------------------------------------- */
-
-        @media (max-width: 768px) {
-            #sidebar {
-                margin-left: -250px;
-            }
-            #sidebar.active {
-                margin-left: 0;
-            }
-            #sidebarCollapse span {
-                display: none;
-            }
+        .image-size {
+            height:940px;
+            max-width: 100%;
+            max-height: 100%;
+            margin: auto;
+            display: block;
+            object-fit: cover;
         }
+
     </style>
 
 
@@ -191,116 +103,115 @@
 {{--Section footer--}}
 @section('content')
     {{-- conteiner body --}}
-    <div class="wrapper">
-        <!-- Sidebar  -->
-        <nav id="sidebar">
-            <div class="sidebar-header">
-                <h3>Bootstrap Sidebar</h3>
-            </div>
+    {{--<div class="container-fluid">
+        <img class="image-size" src="{{ $post->file }}"  alt="{{ $post->name }}"/>
+        <!-- Portfolio Item Heading -->
+        <h1>{{ $post->name }} </h1>
+        <small>Categoria: {{ $post->category->name  }}</small>
 
-            <ul class="list-unstyled components">
-                <p>Dummy Heading</p>
-                <li class="active">
-                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
-                    <ul class="collapse list-unstyled" id="homeSubmenu">
-                        <li>
-                            <a href="#">Home 1</a>
-                        </li>
-                        <li>
-                            <a href="#">Home 2</a>
-                        </li>
-                        <li>
-                            <a href="#">Home 3</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#">About</a>
-                </li>
-                <li>
-                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
-                    <ul class="collapse list-unstyled" id="pageSubmenu">
-                        <li>
-                            <a href="#">Page 1</a>
-                        </li>
-                        <li>
-                            <a href="#">Page 2</a>
-                        </li>
-                        <li>
-                            <a href="#">Page 3</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#">Portfolio</a>
-                </li>
-                <li>
-                    <a href="#">Contact</a>
-                </li>
-            </ul>
+        <a href="{{ url()->previous() }}">back</a>
 
-            <ul class="list-unstyled CTAs">
-                <li>
-                    <a href="https://bootstrapious.com/tutorial/files/sidebar.zip" class="download">Download source</a>
-                </li>
-                <li>
-                    <a href="https://bootstrapious.com/p/bootstrap-sidebar" class="article">Back to article</a>
-                </li>
-            </ul>
-        </nav>
+    </div>--}}
 
-        <!-- Page Content  -->
-        <div id="content">
+    <article>
 
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <div class="container-fluid">
+        <div class="container-fluid">
 
-                    <button type="button" id="sidebarCollapse" class="btn btn-info">
-                        <i class="fas fa-align-left"></i>
-                        <span>Toggle Sidebar</span>
-                    </button>
-                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <i class="fas fa-align-justify"></i>
-                    </button>
+            <div class="row">
+                <div class="col-9">
 
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="nav navbar-nav ml-auto">
-                            <li class="nav-item active">
-                                <a class="nav-link" href="#">Page</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Page</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Page</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Page</a>
-                            </li>
-                        </ul>
+                    <div class="content-section">
+                        <img class="image-size" src="{{ $post->file }}"  alt="{{ $post->name }}"/>
                     </div>
                 </div>
-            </nav>
 
-            <div class="container-fluid">
-                <nav id="navid" class="divbar">
-                    <button type="button" class="toggle-collapse" id="toggle-button">
-                        <span class="toggle-icon"></span>
-                    </button>
-                </nav>
+                <div class="col-3">
 
-                <div class="divbar">
-                    testando a barra lateral
+                    <div class="sidebar-section">
+                        <div class="sidebar-item">
+                            <div class="make-me-sticky">
+                                <div class="row">
+                                    <div class="col-md-12 offset-md-0" style="text-align: left;" >
+                                        <img src="{{asset($post->user->profile->file)}}" alt="{{$post->user->profile->name}}" class="cir-responsive"/>
+
+                                        {{$post->user->name}}
+                                        <p style="font-size: 50%;">{{$post->user->profile->country}}</p>
+                                        <hr>
+                                    </div>
+                                    <div class="col-md-12 offset-md-0" style="text-align: center;" >
+                                        <button type="button" class="badge badge-pill badge-primary">
+                                            Seguidores <span class="badge badge-light">4</span>
+                                        </button>
+                                        <button type="button" class="badge badge-pill badge-primary">
+                                            Seguindo <span class="badge badge-light">4</span>
+                                        </button>
+                                        <button type="button" class="badge badge-pill badge-primary">
+                                            Publicações <span class="badge badge-light">4</span>
+                                        </button>
+                                        <hr>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="sidebar-item">
+
+                            <div class="make-me-sticky">
+                                <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#demo">Detalhes</button>
+                            </div>
+
+                            <div id="demo" class="collapse show" style="text-align: left;" >
+                                <hr>
+                                <div class="row"  >
+
+                                    <div class="col-1"><img src="{{asset('img/camera-retro.svg')}}" alt="" style="max-height: 20px; fill: #385d7a;"></div>
+                                    <div class="col-5">{{ $post->detail->equipment }}</div>
+                                    <div class="col-1"><img src="{{asset('img/resize-tool.svg')}}" alt="" style="max-height: 20px"> </div>
+                                    <div class="col-4">{{ $post->detail->dimensionY }} x {{ $post->detail->dimensionX }}</div>
+
+                                </div>
+                                <div class="row">
+
+                                    <div class="col-1"><img src="{{asset('img/resolution.svg')}}" alt="" style="max-height: 20px"></div>
+                                    <div class="col-5">{{ $post->detail->resolution }}</div>
+                                    <div class="col-1"><img src="{{asset('img/svg-shutter-icon-2.svg')}}" alt="" style="max-height: 20px"></div>
+                                    <div class="col-5"> {{ $post->detail->aperture }}</div>
+
+                                </div>
+                                <div class="row">
+
+                                    <div class="col-1"> <img src="{{asset('img/brightness.svg')}}" alt="" style="max-height: 20px"></div>
+                                    <div class="col-5">{{ $post->detail->exposure }}</div>
+                                    <div class="col-1"> <img src="{{asset('img/iso-file-format.svg')}}" alt="" style="max-height: 20px"></div>
+                                    <div class="col-5"> {{ $post->detail->latitude }} ;  {{ $post->detail->longitude }}</div>
+
+                                </div>
+                                <div class="row">
+
+                                    <div class="col-1"> <img src="{{asset('img/chip.svg')}}" alt="" style="max-height: 20px"></div>
+                                    <div class="col-5">{{ $post->detail->technologie->name}} </div>
+                                    <div class="col-1"></div>
+                                    <div class="col-5"></div>
+
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="make-me-sticky">
+                                <!-- Portfolio Item Heading -->
+                                <h1>{{ $post->name }} </h1>
+                                <small>Categoria: {{ $post->category->name  }}</small>
+                            </div>
+                        </div>
+                        <br>
+                        <a href="{{ url()->previous() }}">back</a>
+                    </div>
 
                 </div>
-
-
-
             </div>
-
-
         </div>
-    </div>
+
+    </article>
 
 @endsection
 
@@ -310,14 +221,6 @@
 {{--Section footer--}}
 @section('footer')
 
-    {{-- Another scripts and styles in footer --}}
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#sidebarCollapse').on('click', function () {
-                $('#sidebar').toggleClass('active');
-            });
-        });
-    </script>
 
 @endsection
 

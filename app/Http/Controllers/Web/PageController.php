@@ -176,10 +176,14 @@ class PageController extends Controller
         $followers = $user->followers;
         $followings = $user->followings;
 
+        if(Auth::user()) {
+            $me = Auth::user()->id;
 
-        $me = Auth::user()->id;
+            $isFollow = $followers->contains($me);
+        } else {
+            $isFollow = false;
+        }
 
-        $isFollow = $followers->contains($me);
 
 
 

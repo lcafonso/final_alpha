@@ -68,9 +68,9 @@
                                 <a href="#" class="badge badge-dark badge-pill">{{$user->profile->social1}}</a>
 
                                 <hr>
-                                <span class="badge badge-primary"><i class="fa fa-user"></i> 900 Followers</span>
-                                <span class="badge badge-success"><i class="fa fa-cog"></i> 43 Forks</span>
-                                <span class="badge badge-danger"><i class="fa fa-eye"></i> 245 Views</span>
+                                <span class="badge badge-primary"><i class="fa fa-user"></i> {{$followers->count()}} Seguidores</span>
+                                <span class="badge badge-success"><i class="fa fa-cog"></i> {{$followings->count()}} Seguindo</span>
+                                <span class="badge badge-danger"><i class="fa fa-eye"></i> {{$numberOfPosts['publicadas']}}/{{$numberOfPosts['total']}} Publicações</span>
                             </div>
                             <div class="col-md-12">
                                 <h5 class="mt-2"><span class="fa fa-clock-o ion-clock float-right"></span> Dados da Conta</h5>

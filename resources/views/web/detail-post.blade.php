@@ -293,21 +293,21 @@
                                         </div>
                                     </div>
                                     <hr>
-
-                                    @if(Auth::user()->id !=  $user->id )
-                                        <div class="col text-center">
-                                            @if(!$isFollow)
-                                                {!! Form::open(['route' => ['user.follow', $user->id], 'method' => 'POST']) !!}
-                                                <button class="btn badge badge-pill badge-primary"> seguir </button>
-                                                {!! Form::close() !!}
-                                            @else
-                                                {!! Form::open(['route' => ['user.unfollow', $user->id], 'method' => 'POST']) !!}
-                                                <button class="btn badge badge-pill badge-secondary"> seguindo </button>
-                                                {!! Form::close() !!}
-                                            @endif
-                                        </div>
-                                    @endif
-
+                                    @auth
+                                        @if(Auth::user()->id !=  $user->id )
+                                            <div class="col text-center">
+                                                @if(!$isFollow)
+                                                    {!! Form::open(['route' => ['user.follow', $user->id], 'method' => 'POST']) !!}
+                                                    <button class="btn badge badge-pill badge-primary"> seguir </button>
+                                                    {!! Form::close() !!}
+                                                @else
+                                                    {!! Form::open(['route' => ['user.unfollow', $user->id], 'method' => 'POST']) !!}
+                                                    <button class="btn badge badge-pill badge-secondary"> seguindo </button>
+                                                    {!! Form::close() !!}
+                                                @endif
+                                            </div>
+                                        @endif
+                                    @endauth
 
 
                                 </div>
