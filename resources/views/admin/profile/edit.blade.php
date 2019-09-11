@@ -31,7 +31,7 @@
 
                 {!! Form::model( $user, ['route' => ['adminprofile.update', $user->id], 'method' => 'PUT']) !!}
 
-                    @include('admin.profile.partials.form')
+                @include('admin.profile.partials.form')
 
                 {!! Form::close() !!}
 

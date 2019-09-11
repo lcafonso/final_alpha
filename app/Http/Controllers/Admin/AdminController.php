@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-
+use App\Post;
 use App\District;
 use App\County;
 use App\Place;
@@ -23,7 +23,16 @@ class AdminController extends Controller
 
         $pageData = ['title' => 'Administração', 'smenu' => '', 'bg' => ''];
 
-        return view('admin.main.index', compact('pageData') );
+
+        $posts = Post::orderBy('created','ASC')
+            ->where('status','DRAFT')
+            ->paginate();
+
+        $postsDraft = Post::where('status','DRAFT')->count();
+
+
+
+        return view('admin.main.index', compact('pageData','posts','postsDraft') );
     }
 
     public function teste()

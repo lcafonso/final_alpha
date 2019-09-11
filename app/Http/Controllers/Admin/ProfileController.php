@@ -43,7 +43,8 @@ class ProfileController extends Controller
      */
     public function create()
     {
-        //
+        $user = new User;
+        return view('admin.users.create', compact('user') );
     }
 
     /**
@@ -69,7 +70,8 @@ class ProfileController extends Controller
         $followers = $user->followers;
         $followings = $user->followings;
 
-        return view('user.show', compact('user', 'followers' , 'followings') );
+
+        return view('admin.users.show', compact('user', 'followers' , 'followings') );
     }
 
     /**
@@ -80,7 +82,9 @@ class ProfileController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::find($id);
+
+        return view('admin.users.edit', compact('user'));
     }
 
     /**
@@ -92,7 +96,21 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::find($id);
+
+        $user->fill([
+            'name'       => (!empty($request->get('name'))?$request->get('name'): $user->name),
+            'password'   => (!empty($request->get('password'))?$request->get('password'):$user->password),
+        ])->save();
+
+
+        $profile = Profile::where('user_id',$id);
+
+        $profile->fill($request->all())->save();
+
+
+        return redirect()->route('adminprofiles.edit', $id)
+            ->with('info','Operação executada com sucesso.');
     }
 
     /**

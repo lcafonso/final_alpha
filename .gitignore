@@ -52,6 +52,7 @@ $RECYCLE.BIN/
 *.msm
 *.msp
 
+*.bat
 # ====== JETBRAINS IDEs ===========================================
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm
 ## Directory-based project format

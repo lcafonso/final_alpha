@@ -153,6 +153,7 @@ class PostController extends Controller
         $post = Post::find($id);
         $tech = Technologie::where('id',$post->detail->technologie_id)->first();
 
+
        /* $posts = Post::orderBy('created','DESC')
             ->where('status','PUBLISHED')
             ->where('id','!=',$post->id)
@@ -165,7 +166,7 @@ class PostController extends Controller
 
         /*return view('admin.posts.show', compact('post', 'tech','posts'));*/
         return view('admin.posts.show', compact('post', 'tech','posts'));
-}
+    }
 
 
 

@@ -11,8 +11,8 @@
                 </div>
 
                 <div>
-                    <p><strong>Nome:</strong> {{$tecnologie->name }}</p>
-                    <p><strong>Slug:</strong> {{$tecnologie->slug }}</p>
+                    <p><strong>Nome:</strong> {{$technologie->name }}</p>
+                    <p><strong>Slug:</strong> {{$technologie->slug }}</p>
                 </div>
 
             </div><!-- /.blog-main -->
