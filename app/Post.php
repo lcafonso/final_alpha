@@ -35,4 +35,10 @@ class Post extends Model
     public function detail(){
         return $this->hasOne(Detail::class);
     }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class)->whereNull('parent_id');
+    }
+
 }

@@ -56,14 +56,14 @@
         }
 
         /* Icon when the collapsible content is shown */
-        .btn:after {
+        .icon:after {
             font-family: "Glyphicons Halflings";
             content: "\e114";
             float: right;
             margin-left: 15px;
         }
         /* Icon when the collapsible content is hidden */
-        .btn.collapsed:after {
+        .icon.collapsed:after {
             content: "\e080";
         }
 
@@ -158,7 +158,7 @@
                         <div class="sidebar-item">
 
                             <div class="make-me-sticky">
-                                <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#demo">Detalhes</button>
+                                <button type="button" class="btn btn-primary icon" data-toggle="collapse" data-target="#demo">Detalhes</button>
                             </div>
 
                             <div id="demo" class="collapse show" style="text-align: left;" >
@@ -203,8 +203,34 @@
                                 <small>Categoria: {{ $post->category->name  }}</small>
                             </div>
                         </div>
+                        <div class="sidebar-item">
+
+                            <hr />
+                            <div class="make-me-sticky">
+                                <button type="button" class="btn btn-primary icon" data-toggle="collapse" data-target="#comentarios">Comentarios</button>
+                            </div>
+                            <div id="comentarios" class="collapse show" style="text-align: left;" >
+                                <hr />
+                                <div style="width: auto; height: 200px; overflow-y: scroll; text-align: left">
+                                @include('admin.posts.commentsDisplay', ['comments' => $post->comments, 'post_id' => $post->id])
+                                <hr />
+                                </div>
+                                <h4>Comentar</h4>
+                                <form method="post" action="{{ route('comments.store'   ) }}">
+                                    @csrf
+                                    <div class="form-group">
+                                        <textarea class="form-control" name="body"></textarea>
+                                        <input type="hidden" name="post_id" value="{{ $post->id }}" />
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="submit" class="btn btn-success" value="Salvar" />
+                                    </div>
+                                </form>
+                            </div>
+                            <hr />
+                        </div>
                         <br>
-                        <a href="{{ url()->previous() }}">back</a>
+                        <a href="{{ route('admin.index') }}">back</a>
                     </div>
 
                 </div>

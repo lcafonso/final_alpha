@@ -77,6 +77,7 @@ Route::resource('adminroles', 'Admin\RoleController');
 Route::resource('admindistricts', 'Admin\DistrictController');
 Route::resource('admincounties', 'Admin\CountyController');
 Route::resource('adminplaces', 'Admin\PlaceController');
+Route::resource('comments', 'Admin\CommentController');
 
 /* Tools */
 Route::get('/tools', 'Tools\ToolsController@tools')->name('tools');
