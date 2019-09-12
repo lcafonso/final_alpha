@@ -8,7 +8,7 @@ use App\County;
 use App\Place;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use Auth;
 
 class AdminController extends Controller
 {
@@ -44,7 +44,7 @@ class AdminController extends Controller
         $pageData = ['title' => 'Administração - Teste', 'smenu' => '', 'bg' => ''];
 
 
-        return view('admin.main.teste2', compact('pageData','districts','place') );
+        return view('admin.main.teste', compact('pageData','districts','place') );
 
     }
 
@@ -52,7 +52,11 @@ class AdminController extends Controller
     {
 
 
-        return view('admin.posts.show');
+        $user = Auth::user();
+        $pageData = ['title' => 'Administração - Teste', 'smenu' => '', 'bg' => ''];
+
+
+        return view('admin.main.teste2', compact('pageData','user') );
 
     }
 
