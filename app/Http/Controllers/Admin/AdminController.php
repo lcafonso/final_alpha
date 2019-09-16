@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Post;
+use App\User;
 use App\District;
 use App\County;
 use App\Place;
@@ -50,13 +51,15 @@ class AdminController extends Controller
 
     public function teste2()
     {
+        $id = 280;
 
 
-        $user = Auth::user();
+        $post = Post::find($id);
+        $user = User::find($post->user_id);
         $pageData = ['title' => 'Administração - Teste', 'smenu' => '', 'bg' => ''];
 
 
-        return view('admin.main.teste2', compact('pageData','user') );
+        return view('admin.main.teste2', compact('pageData','user','post') );
 
     }
 

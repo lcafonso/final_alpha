@@ -53,7 +53,7 @@ Route::post('/{profileId}/unfollow', 'Admin\ProfileController@unFollowUser')->na
 
 
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 /* Admin */
 Route::resource('admin', 'Admin\AdminController');

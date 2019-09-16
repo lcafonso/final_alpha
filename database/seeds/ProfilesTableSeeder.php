@@ -26,7 +26,7 @@ class   ProfilesTableSeeder extends Seeder
                 'body' => 'body',
                 'file' => 'url',
                 'local' => 'Local',
-                'country' => 'Contry',
+                'country' => 'Country',
                 'birth' => $user['created_at'],
                 'genre' => 'MALE',
                 'social1' => 'social1',
