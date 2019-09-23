@@ -83,29 +83,7 @@
 
 
         <script type="text/javascript">
-            /* Inicializa mapa */
-            var map;
-            var mapLat = -7.840978;
-            var mapLng = 39.5540562;
-            var mapDefaultZoom = 6.7;
 
-            function initialize_map(lat, lng) {
-
-                map = new ol.Map({
-                    target: "map",
-                    layers: [
-                        new ol.layer.Tile({
-                            source: new ol.source.OSM()
-                        })
-                    ],
-                    view: new ol.View({
-                        center: ol.proj.fromLonLat([lng, lat]),
-                        zoom: mapDefaultZoom
-                    })
-                });
-            }
-
-            /* Funçoes auxiliares*/
             $(function () {
                 $('[data-toggle="tooltip"]').tooltip()
             })
@@ -114,31 +92,23 @@
                 document.getElementById(id).value = newvalue;
 
             };
-            function add_map_point(lat, lng) {
-                var vectorLayer = new ol.layer.Vector({
-                    source:new ol.source.Vector({
-                        features: [new ol.Feature({
-                            geometry: new ol.geom.Point(ol.proj.transform([parseFloat(lng), parseFloat(lat)], 'EPSG:4326', 'EPSG:3857')),
-                        })]
-                    }),
-                    style: new ol.style.Style({
-                        image: new ol.style.Icon({
-                            anchor: [0.5, 0.5],
-                            anchorXUnits: "fraction",
-                            anchorYUnits: "fraction",
-                            src: "{{asset('img/reddot.svg')}}"
-                        })
+
+            var map = new ol.Map({
+                target: 'map',
+                layers: [
+                    new ol.layer.Tile({
+                        source: new ol.source.OSM()
                     })
-                });
-                map.addLayer(vectorLayer);
-            }
+                ],
+
+                view: new ol.View({
+                    center: ol.proj.fromLonLat([-8.840978,39.7540562]),
+                    zoom: 7
+                })
+            });
 
 
             $(document).ready(function(){
-
-
-                initialize_map(mapLng, mapLat);
-
                 $("#name, #slug").keyup(function(){
                     var value = string_to_slug($( this ).val());
                     $( "#slug" ).val( value );
@@ -250,27 +220,68 @@
 
 
 
+            var successFunction = function(res){
+                //console.log(res);
+                $.each(res,function(index,placeOBJ){
+                    //console.log(placeOBJ);
+                    //document.getElementById("result").innerHTML =placeOBJ['id'];
+
+                    // create a layer with the OSM source
+                    var layer = new ol.layer.Tile({
+                        source: new ol.source.OSM()
+                    });
+
+                    // create an interaction to add to the map that isn't there by default
+                    var interaction = new ol.interaction.DragRotateAndZoom();
+
+                    // create a control to add to the map that isn't there by default
+                    var control = new ol.control.FullScreen();
+
+                    // center on london, transforming to map projection
+                    var center = ol.proj.fromLonLat([placeOBJ['latitude'],placeOBJ['longitude']]);
+
+                    // an overlay to position at the center
+                    var overlay = new ol.Overlay({
+                        position: center,
+                        element: document.getElementById('overlay')
+                    });
+
+                    $('#map').html('');
+
+                    // view, starting at the center
+                    var view = new ol.View({
+                        center: center,
+                        zoom: 8
+                    });
+
+                    // finally, the map with our custom interactions, controls and overlays
+                    var map = new ol.Map({
+                        target: 'map',
+                        layers: [layer],
+                        interactions: [interaction],
+                        controls: [control],
+                        overlays: [overlay],
+                        view: view
+                    });
+
+                    setText("imgLong",placeOBJ['longitude']);
+                    setText("imgLat", placeOBJ['latitude']);
+                });
+
+
+            };
+
 
             $('#place').on('change',function(){
 
                 var placeID = $(this).val();
-
-                $.ajax({
-                    type: "GET",
-                    url: "{{url('get-place')}}?place_id="+placeID,
-                    success: function(res){
-                        $.each(res,function(index,placeOBJ){
-                            //console.log(placeOBJ);
-                            //document.getElementById("result").innerHTML =placeOBJ['id'];
-
-                            add_map_point(placeOBJ['longitude'],  placeOBJ['latitude']);
-                            setText("imgLong",placeOBJ['longitude']);
-                            setText("imgLat", placeOBJ['latitude']);
-                        });
-                    }
-                });
-
-
+                if(placeID){
+                    $.ajax({
+                        type:"GET",
+                        url:"{{url('get-place')}}?place_id="+placeID,
+                        success:successFunction
+                    });
+                }
             });
 
             /* Chamada para informações da imagem*/

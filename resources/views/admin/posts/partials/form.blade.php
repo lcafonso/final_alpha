@@ -199,10 +199,11 @@
 
 
             </div>
+
             <div class="col-6 col-sm-4">
                 <h4 class="my-3">Mapa</h4>
                 <div id="map" class="map"></div>
-                <div id="overlay" style="background-color: red; width: 20px; height: 20px; border-radius: 10px;"></div>
+{{--                <div id="overlay" style="background-color: red; width: 20px; height: 20px; border-radius: 10px;"></div>--}}
             </div>
 
         </div>

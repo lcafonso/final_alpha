@@ -315,7 +315,8 @@ Reset CSS
 
                 </div>
 
-                {{--@include('admin.main.partials.cardTools', ['post' => $post])--}}
+                @include('admin.main.partials.cardMap', ['post' => $post])
+
 
 
 
@@ -398,7 +399,7 @@ Reset CSS
         var map;
         var mapLat = 41.80582;
         var mapLng = -6.75719;
-        var mapDefaultZoom = 10;
+        var mapDefaultZoom = 12;
 
         function initialize_map() {
             map = new ol.Map({
@@ -428,7 +429,7 @@ Reset CSS
                         anchor: [0.5, 0.5],
                         anchorXUnits: "fraction",
                         anchorYUnits: "fraction",
-                        src: "https://upload.wikimedia.org/wikipedia/commons/e/ec/RedDot.svg"
+                        src: "{{asset('img/reddot.svg')}}"
                     })
                 })
             });

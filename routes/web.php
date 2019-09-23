@@ -66,7 +66,7 @@ Route::get('/compare/{id}', 'Admin\PostController@compare')->name('compare');
 /* Admin - localização */
 Route::get('get-state-list','Admin\AdminController@getStateList');
 Route::get('get-city-list','Admin\AdminController@getCityList');
-Route::get('get-place','Admin\AdminController@getPlace');
+Route::get('get-place','Admin\AdminController@getPlace')->name('get-place');
 
 /* Admin - Tabelas */
 Route::resource('admintags', 'Admin\TagController');

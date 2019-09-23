@@ -75,6 +75,7 @@ class AdminController extends Controller
 
     public function getCityList(Request $request)
     {
+
         $places = Place::orderBy('name','ASC')
             ->where("county_id",$request->county_id)
             ->where("district_id",$request->district_id)
@@ -84,9 +85,10 @@ class AdminController extends Controller
 
     public function getPlace(Request $request)
     {
+
         $place = Place::orderBy('name','ASC')
             ->where("id",$request->place_id)
-            ->all();
+            ->get();
 
         return response()->json($place);
     }
