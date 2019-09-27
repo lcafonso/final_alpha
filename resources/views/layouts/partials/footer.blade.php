@@ -51,8 +51,8 @@
                     <div class="col-md-6 ">
                         <h6> Newsletter</h6>
                         <div class="social">
-                            <a href="#"><img src="{{asset('img/facebook-logo.svg')}}" alt="" style="max-height: 50px;"></a>
-                            <a href="#"><img src="{{asset('img/linkedin-logo.svg')}}" alt="" style="max-height: 50px;"></a>
+                            <a href="https://www.facebook.com/Centro-de-Investiga%C3%A7%C3%A3o-de-Montanha-373612886624279/" target="_blank" ><img src="{{asset('img/facebook-logo.svg')}}" alt="" style="max-height: 50px;"></a>
+                            <a href="https://cimo.ipb.pt/web/" target="_blank"><img src="{{asset('img/linkedin-logo.svg')}}" alt="" style="max-height: 50px;"></a>
                         </div>
 
                         <p>That's technology limitation of LCD monitors</p>
@@ -67,6 +67,6 @@
         <p>Anything you want</p>
     </div>
     <!-- Default to the left -->
-    <p>Copyright &copy; 2019 <a href="#" style="color: grey">Luis CM Afonso</a>. All rights reserved.</p>
+    <p>Copyright &copy; 2019 <a href="http://artedesign.cf" target="_blank" style="color: grey">Luis CM Afonso</a>. All rights reserved.</p>
 
 </footer>

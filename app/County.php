@@ -13,11 +13,11 @@ class County extends Model
 	];
 
     public function district() {
-    	return $this->belongsTo(District::class);
+    	return $this->belongsTo(District::class,'district_id','district_id');
     }
 
-      
+
     public function places() {
-    	return $this->hasMany(Place::class);
+    	return $this->hasMany(Place::class,'place_id','place_id');
     }
-}	
+}

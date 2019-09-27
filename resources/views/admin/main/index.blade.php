@@ -108,7 +108,7 @@
                         <div class="card-body-icon">
                             <i class="fas fa-fw fa-users"></i>
                         </div>
-                        <div class="mr-5">11 Utilizadores por aprovar!</div>
+                        <div class="mr-5">{{$usersToApprove}} Utilizadores por aprovar!</div>
                     </div>
                     <a class="card-footer text-white clearfix small z-1 toggle" href="#listauser">
                         <span class="float-left">Ver detalhes</span>
@@ -127,9 +127,7 @@
         </div>
 
         <div class="toggle-content" id="listauser">
-            <div class="columns large-6">
-                lista de utilizadores
-            </div>
+            @include('admin.main.partials.userNotConfirm', $users)
         </div>
 
     </div>

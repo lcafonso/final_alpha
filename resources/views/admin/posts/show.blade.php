@@ -3,8 +3,35 @@
 {{--Section Head--}}
 @section('head')
     {{-- Another scripts and styles in head--}}
+
     <style>
-        @font-face{font-family:'Glyphicons Halflings';src:url('https://netdna.bootstrapcdn.com/bootstrap/3.0.0/fonts/glyphicons-halflings-regular.eot');src:url('https://netdna.bootstrapcdn.com/bootstrap/3.0.0/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'),url('https://netdna.bootstrapcdn.com/bootstrap/3.0.0/fonts/glyphicons-halflings-regular.woff') format('woff'),url('https://netdna.bootstrapcdn.com/bootstrap/3.0.0/fonts/glyphicons-halflings-regular.ttf') format('truetype'),url('https://netdna.bootstrapcdn.com/bootstrap/3.0.0/fonts/glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg');}.glyphicon{position:relative;top:1px;display:inline-block;font-family:'Glyphicons Halflings';font-style:normal;font-weight:normal;line-height:1;-webkit-font-smoothing:antialiased;}
+        @font-face{
+            font-family:'Glyphicons Halflings';
+            src:url('https://netdna.bootstrapcdn.com/bootstrap/3.0.0/fonts/glyphicons-halflings-regular.eot');
+            src:url('https://netdna.bootstrapcdn.com/bootstrap/3.0.0/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'),
+            url('https://netdna.bootstrapcdn.com/bootstrap/3.0.0/fonts/glyphicons-halflings-regular.woff') format('woff'),
+            url('https://netdna.bootstrapcdn.com/bootstrap/3.0.0/fonts/glyphicons-halflings-regular.ttf') format('truetype'),
+            url('https://netdna.bootstrapcdn.com/bootstrap/3.0.0/fonts/glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg');
+        }
+
+        .glyphicon{
+            position:relative;
+            top:1px;
+            display: inline-block;
+            font-family:'Glyphicons Halflings';
+            font-style:normal;
+            font-weight:normal;
+            line-height:1;
+            -webkit-font-smoothing:antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .glyphicon-ok:before {
+            font-family: "Glyphicons Halflings";
+            content: "\e114";
+            float: right;
+            margin-left: 15px;
+        }
 
         .content-section {
             background-color: #000000;
@@ -90,6 +117,9 @@
             object-fit: cover;
         }
 
+
+
+
     </style>
 
 
@@ -140,13 +170,13 @@
                                     </div>
                                     <div class="col-md-12 offset-md-0" style="text-align: center;" >
                                         <button type="button" class="badge badge-pill badge-primary">
-                                            Seguidores <span class="badge badge-light">4</span>
+                                            Seguidores <span class="badge badge-light">0</span>
                                         </button>
                                         <button type="button" class="badge badge-pill badge-primary">
-                                            Seguindo <span class="badge badge-light">4</span>
+                                            Seguindo <span class="badge badge-light">0</span>
                                         </button>
                                         <button type="button" class="badge badge-pill badge-primary">
-                                            Publicações <span class="badge badge-light">4</span>
+                                            Publicações <span class="badge badge-light">0</span>
                                         </button>
                                         <hr>
                                     </div>
@@ -203,6 +233,45 @@
                                 <small>Categoria: {{ $post->category->name  }}</small>
                             </div>
                         </div>
+
+                        @auth
+                        <div class="sidebar-item">
+                            <small>
+                                <hr>
+                                {!! Form::model($post, ['route' => ['adminposts.updateStatus', $post->id],'method' => 'PUT'])  !!}
+                                {{ csrf_field() }}
+                                    <div class="form-group">
+                                        {!! Form::label('status', 'Estado actual:') !!}
+                                        <br>
+                                        @if($post->status=='DRAFT')
+                                            <label>
+                                                {!! Form::radio('status', 'PUBLISHED',false,[]) !!} Publicado
+                                            </label>
+                                            <label>
+                                                {!! Form::radio('status', 'DRAFT',true,['status' => 'DRAFT']) !!} Rascunho
+                                            </label>
+
+                                        @else
+                                            <label>
+                                                {!! Form::radio('status', 'PUBLISHED',true,['status' => 'PUBLISHED']) !!} Publicado
+                                            </label>
+                                            <label>
+                                                {!! Form::radio('status', 'DRAFT',false,[] ) !!} Rascunho
+                                            </label>
+
+                                        @endif
+                                        &nbsp; &nbsp; &nbsp; &nbsp;
+                                        {{ Form::button('<i class="fa fa-download"></i>', ['type' => 'submit', 'class' => 'btn btn-info btn-sm'] ) }}
+
+
+                                    </div>
+
+                                {!! Form::close() !!}
+
+                            </small>
+                        </div>
+                        @endauth
+
                         <div class="sidebar-item">
 
                             <hr />

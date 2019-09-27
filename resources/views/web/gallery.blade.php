@@ -230,10 +230,10 @@
                     <a class="nav-link" data-toggle="tab" href="#pessoa" role="tab">Pessoa</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#grupo" role="tab">Grupo</a>
+                    <a class="nav-link" data-toggle="tab" href="#grupo" role="tab">Localidade</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#album" role="tab">Album</a>
+                    <a class="nav-link" data-toggle="tab" href="#album" role="tab">Coordenadas GPS</a>
                 </li>
             </ul>
 
@@ -256,9 +256,12 @@
 
                 <div class="tab-pane" id="grupo" role="tabpanel">
                     {{-- pane 3 --}}
-                    <p style="color: #FFFFFF">Ainda nao implementado, desculpe o transtorno!</p>
+                    {!! Form::open(['route' => 'local_search', 'method' => 'get']) !!}
+                    @include('web._localform')
+                    {!! Form::close() !!}
                 </div>
-                <div class="tab-pane" id="albun" role="tabpanel">
+
+                <div class="tab-pane" id="album" role="tabpanel">
                     {{-- pane 4 --}}
                     <p style="color: #FFFFFF"> Ainda nao implementado, desculpe o transtorno!</p>
 
@@ -347,6 +350,93 @@
         document.getElementById('dataInicio').value = "2019-01-02";
         document.getElementById('dataFim').value = today();
 
+
+        $(document).ready(function(){
+
+            $('#district').change(function(){
+                var districtID = $(this).val();
+                if(districtID){
+                    $.ajax({
+                        type:"GET",
+                        url:"{{url('get-state-list')}}?district_id="+districtID,
+                        success:function(res){
+                            if(res){
+                                $("#county").empty();
+                                $("#county").append('<option>Selecione o Concelho</option>');
+
+                                $("#place").empty();
+                                $("#place").append('<option>Selecione a localidade</option>');
+
+
+                                $.each(res,function(key,value){
+                                    $("#county").append('<option value="'+key+'">'+value+'</option>');
+                                });
+
+                            }else{
+                                $("#county").empty();
+                            }
+                        }
+                    });
+                }else{
+                    $("#county").empty();
+                    $("#place").empty();
+                }
+            });
+
+            $('#county').on('change',function(){
+                var countyID = $(this).val();
+                var districtID = $("#district").val();
+                if(countyID){
+                    $.ajax({
+                        type:"GET",
+                        url:"{{url('get-city-list')}}?county_id="+countyID+"&district_id="+districtID,
+                        success:function(res){
+                            if(res){
+                                $("#place").empty();
+                                $("#place").append('<option>Selecione a localidade</option>');
+                                $.each(res,function(key,value){
+                                    $("#place").append('<option value="'+key+'">'+value+'</option>');
+                                });
+
+                            }else{
+                                $("#place").empty();
+                            }
+                        }
+                    });
+                }else{
+                    $("#place").empty();
+                }
+
+            });
+
+
+
+
+            $('#place').on('change',function(){
+
+                var placeID = $(this).val();
+
+                $.ajax({
+                    type: "GET",
+                    url: "{{url('get-place')}}?place_id="+placeID,
+                    success: function(res){
+                        $.each(res,function(index,placeOBJ){
+                            //console.log(placeOBJ);
+                            //document.getElementById("result").innerHTML =placeOBJ['id'];
+
+                            add_map_point(placeOBJ['longitude'],  placeOBJ['latitude']);
+                            setText("imgLong",placeOBJ['longitude']);
+                            setText("imgLat", placeOBJ['latitude']);
+                        });
+                    }
+                });
+
+
+            });
+        });
+
     </script>
+
+
 
 @endsection

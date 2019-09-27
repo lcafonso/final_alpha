@@ -36,6 +36,10 @@ class Post extends Model
         return $this->hasOne(Detail::class);
     }
 
+    public function place(){
+        return $this->hasOne(Place::class,'place_id');
+    }
+
     public function comments()
     {
         return $this->hasMany(Comment::class)->whereNull('parent_id');

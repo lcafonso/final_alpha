@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Post;
+use App\Role;
 use App\User;
 use App\District;
 use App\County;
@@ -10,6 +11,8 @@ use App\Place;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Auth;
+use DB;
+
 
 class AdminController extends Controller
 {
@@ -29,25 +32,53 @@ class AdminController extends Controller
             ->where('status','DRAFT')
             ->paginate();
 
+
         $postsDraft = Post::where('status','DRAFT')->count();
 
+        $users = User::orderBy('created_at','ASC')
+            ->where('email_verified_at', null )
+            ->paginate();
+
+        $usersToApprove = User::where('email_verified_at', null )->count();
 
 
-        return view('admin.main.index', compact('pageData','posts','postsDraft') );
+        return view('admin.main.index', compact('pageData','posts','postsDraft','users','usersToApprove') );
     }
 
     public function teste()
     {
-        $districts = District::all()->pluck("name","district_id");
-        $districts = array_merge(['0'=>'Selecione o distrito'],$districts->toArray());
 
-        $place = [];
+        $posts = Post::orderBy('created','ASC')
+            ->where('status','PUBLISHED')
+            ->get();
+
+        $base = DB::table('posts')
+            ->where('posts.status','PUBLISHED')
+            ->join('details', 'posts.id', '=', 'details.post_id')
+            ->join('places', 'details.place_id', '=', 'places.place_id')
+            ->join('districts', 'places.district_id', '=', 'districts.district_id')
+            ->join('counties', function($join) {
+                $join->on('places.district_id', '=', 'counties.district_id')
+                    ->on('places.county_id', '=', 'counties.county_id');
+                    })
+            ->select('posts.*', 'details.*', 'places.name AS local',
+                'places.county_id',  'counties.name AS freguesia',
+                'places.district_id', 'districts.name AS distrito',
+                'places.CP4' ,'places.CP3','places.CPALF',
+                'places.latitude', 'places.longitude'
+            )->orderBy('posts.id','DESC')->get();
+
+
+        $places = Place::orderBy('name','ASC')
+            ->get();
+
         $pageData = ['title' => 'Administração - Teste', 'smenu' => '', 'bg' => ''];
 
-
-        return view('admin.main.teste', compact('pageData','districts','place') );
+        dd($base);
+        return view('admin.main.teste', compact('pageData','posts','base') );
 
     }
+
 
     public function teste2()
     {
@@ -63,7 +94,23 @@ class AdminController extends Controller
 
     }
 
+    public function showUser($id)
+    {
+        $user = User::find($id);
+        $role = Role::find($user->profile->role_id);
 
+        $total = Post::where('user_id', $id)->count();
+        $publicadas  =  Post::where('status','PUBLISHED')
+            ->where('user_id', $id)
+            ->count();
+
+        $numberOfPosts = [ "total" => $total, "publicadas" => $publicadas ];
+
+        $followers = $user->followers;
+        $followings = $user->followings;
+
+        return view('admin.users.userProfile', compact('user','role', 'numberOfPosts', 'followers', 'followings'));
+    }
 
     public function getStateList(Request $request)
     {

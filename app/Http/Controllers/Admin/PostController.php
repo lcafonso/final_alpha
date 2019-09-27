@@ -258,8 +258,18 @@ class PostController extends Controller
             ->with('info','Operação executada com sucesso.');
     }
 
+    public function updateStatus(Request $request, $id)
+    {
 
+        $post = Post::find($id);
 
+        $post->fill(
+            ['status'       => (!empty($request->get('status'))?$request->get('status'):"DRAFT"),]
+        )->save();
+
+        return redirect()->route('admin.index')
+            ->with('info','Operação executada com sucesso.');
+    }
     /**
      * Remove the specified resource from storage.
      *

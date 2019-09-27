@@ -12,12 +12,12 @@ class District extends Model
 	];
 
     public function counties() {
-        return $this->hasMany(County::class);
+        return $this->hasMany(County::class,null,'district_id');
     }
 
-  
+
     public function places() {
-    	return $this->hasMany(Place::class);
+    	return $this->hasMany(Place::class,null,'district_id');
     }
 
 }

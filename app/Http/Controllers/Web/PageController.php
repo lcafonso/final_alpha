@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Web;
 
+use App\District;
 use App\Role;
 use App\Tag;
 use Illuminate\Http\Request;
@@ -14,6 +15,7 @@ use App\User;
 use App\Post;
 use App\Category;
 use App\Technologie;
+
 
 
 class PageController extends Controller
@@ -42,18 +44,26 @@ class PageController extends Controller
 
     public function gallery() {
 
+        $districts = District::all()->pluck("name","district_id");
+        $districts = array_merge(['0'=>'Selecione o distrito'],$districts->toArray());
+
         $posts = Post::orderBy('id','DESC')->where('status','PUBLISHED')->paginate( 12);
+
+
+
         $categs = Category::orderBy('name','ASC')->pluck('name','id');
         $tags = Tag::orderBy('name','ASC')->pluck('name','id');
 
         $pageData = ['title' => 'Fotografias', 'smenu' => '23', 'bg' => 'img/publish-bg.jpg'];
 
-        return view('web.gallery', compact('pageData','posts','categs','tags') );
+        return view('web.gallery', compact('pageData','posts','categs','tags','districts') );
 
     }
 
     public function simple(Request $request) {
 
+        $districts = District::all()->pluck("name","district_id");
+        $districts = array_merge(['0'=>'Selecione o distrito'],$districts->toArray());
 
         $posts = Post::orderBy('id','DESC')->where('status','PUBLISHED');
 
@@ -69,12 +79,14 @@ class PageController extends Controller
         $tags = Tag::orderBy('name','ASC')->pluck('name','id');
         $pageData = ['title' => 'Fotografias', 'smenu' => '23', 'bg' => 'img/publish-bg.jpg'];
 
-        return view('web.gallery', compact('pageData','posts','categs','tags'));
+        return view('web.gallery', compact('pageData','posts','categs','tags','districts'));
 
     }
 
     public function author(Request $request) {
 
+        $districts = District::all()->pluck("name","district_id");
+        $districts = array_merge(['0'=>'Selecione o distrito'],$districts->toArray());
 
         $posts = Post::orderBy('id','DESC')->where('status','PUBLISHED');
 
@@ -92,7 +104,33 @@ class PageController extends Controller
         $tags = Tag::orderBy('name','ASC')->pluck('name','id');
         $pageData = ['title' => 'Fotografias', 'smenu' => '23', 'bg' => 'img/publish-bg.jpg'];
 
-        return view('web.gallery', compact('pageData','posts','categs','tags'));
+        return view('web.gallery', compact('pageData','posts','categs','tags','districts'));
+
+    }
+
+
+    public function localidade(Request $request) {
+
+        $districts = District::all()->pluck("name","district_id");
+        $districts = array_merge(['0'=>'Selecione o distrito'],$districts->toArray());
+
+        $posts = Post::orderBy('id','DESC')->where('status','PUBLISHED');
+
+
+        if( $request->input('search')){
+            $user = User::where('name', 'LIKE', "%" . $request->search . "%")->first();
+            $posts = $posts->where('user_id', $user->id);
+
+        }
+
+
+        $posts = $posts->paginate(12);
+
+        $categs = Category::orderBy('name','ASC')->pluck('name','id');
+        $tags = Tag::orderBy('name','ASC')->pluck('name','id');
+        $pageData = ['title' => 'Fotografias', 'smenu' => '23', 'bg' => 'img/publish-bg.jpg'];
+
+        return view('web.gallery', compact('pageData','posts','categs','tags','districts'));
 
     }
 
@@ -101,6 +139,8 @@ class PageController extends Controller
 
     {
 
+        $districts = District::all()->pluck("name","district_id");
+        $districts = array_merge(['0'=>'Selecione o distrito'],$districts->toArray());
 
         $posts = Post::orderBy('id','DESC')->where('status','PUBLISHED');
 
@@ -143,15 +183,16 @@ class PageController extends Controller
 
         $pageData = ['title' => 'Fotografias', 'smenu' => '23', 'bg' => 'img/publish-bg.jpg'];
 
-        return view('web.gallery', compact('pageData','posts','categs','tags'));
+        return view('web.gallery', compact('pageData','posts','categs','tags','districts'));
 
     }
 
 
 
+
     public function detail($slug)
     {
-        $pageData = ['title' => 'Detalhe', 'smenu' => '21', 'bg' => 'img/post-bg.jpg'];
+        $pageData = ['title' => 'Detalhe', 'smenu' => '21', 'bg' => 'img/details-bg.jpg'];
 
         $post = Post::where('slug', $slug)->first();
 
@@ -245,5 +286,19 @@ class PageController extends Controller
 
         return view('web.publications', compact('pageData','posts','categs') );
     }
+
+
+    public function teste($id)
+    {
+        $pageData = ['title' => 'Teste', 'smenu' => '00', 'bg' => 'img/details-bg.jpg'];
+
+
+        $post = Post::where('id', $id)->first();
+        $user = User::find($post->user_id);
+
+        return view('web.teste',compact('pageData','post','user'));
+    }
+
+
 
 }

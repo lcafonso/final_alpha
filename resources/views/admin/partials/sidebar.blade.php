@@ -51,7 +51,7 @@
             <span class="fas fa-camera-retro fa-lg fa-fw"></span>
             <span style="margin-left: 25px;">Publicações</span>
         </a>
-
+{{--
         <a href="{{route('tools')}}" class="list-group-item list-group-item-action bg-light">
             <span class="fas fa-tools fa-lg fa-fw"></span>
             <span style="margin-left: 25px;">Ferramentas</span>
@@ -64,6 +64,7 @@
             <span class="fas fa-thermometer-half  fa-lg fa-fw"></span>
             <span style="margin-left: 25px;">Status</span>
         </a>
+ --}}
     </div>
 </div>
 <!-- /#sidebar-wrapper -->

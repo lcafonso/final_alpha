@@ -32,11 +32,13 @@ Route::get('/gallery', 'Web\PageController@gallery')->name('gallery');
 Route::get('/gallery/simple', 'Web\PageController@simple')->name('simple_search');
 Route::get('/gallery/advance', 'Web\PageController@advance')->name('advance_search');
 Route::get('/gallery/author', 'Web\PageController@author')->name('author_search');
+Route::get('/gallery/local', 'Web\PageController@localidade')->name('local_search');
 
 /* Rota de teste */
-Route::get('/admin/teste', 'Admin\AdminController@teste');
-Route::get('/admin/teste2', 'Admin\AdminController@teste2')->name('teste2');
+Route::get('/web/teste/{id}', 'Web\PageController@teste');
+Route::get('/admin/teste2', 'Admin\AdminController@teste2');
 
+Route::get('/admin/teste', 'Admin\AdminController@teste');
 
 /* Rota para gerar o pdf */
 Route::get('/generate-pdf/{slug}','HomeController@generatePDF')->name('generate-pdf');
@@ -45,6 +47,7 @@ Route::get('/generate-pdf/{slug}','HomeController@generatePDF')->name('generate-
 Route::get('/admin/profile', 'Admin\UserController@profile')->name('profile');
 Route::post('/admin/profile', 'Admin\UserController@update_avatar');
 
+Route::get('/admin/user/{id}', 'Admin\AdminController@showUser')->name('adminposts.showUser');
 
 
 Route::post('profile/{profileId}/follow', 'Admin\ProfileController@followUser')->name('user.follow');
@@ -62,6 +65,8 @@ Route::resource('adminprofile', 'Admin\UserController');
 
 Route::get('/repost/{id}', 'Admin\PostController@repost')->name('repost');
 Route::get('/compare/{id}', 'Admin\PostController@compare')->name('compare');
+
+Route::put('status/{id}', 'Admin\PostController@updateStatus')->name('adminposts.updateStatus');
 
 /* Admin - localização */
 Route::get('get-state-list','Admin\AdminController@getStateList');

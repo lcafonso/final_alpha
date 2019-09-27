@@ -41,7 +41,8 @@ class CreateDetailsTable extends Migration
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 
-//            $table->foreign('place_id')->references('place_id')->on('places');
+            $table->foreign('place_id')->references('place_id')->on('places');
+
         });
     }
 

@@ -16,7 +16,7 @@
             {{--  Barra de navegação  --}}
             @include('layouts.partials.nav')
 
-            {{--  header das paginas  --}}
+            {{--  header das paginas--}}
             @include('layouts.partials.header')
 
 

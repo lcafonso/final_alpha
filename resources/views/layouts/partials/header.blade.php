@@ -38,8 +38,11 @@
 
 @else
 
-    <header class="masthead" style="background-image: url({{asset( $pageData['bg'] ) }} ); max-height: 350px; )">
-
+    @if($pageData['smenu'] != 21)
+        <header class="masthead" style="background-image: url({{asset( $pageData['bg'] ) }} ); max-height: 350px; )">
+    @else
+        <header class="masthead" style="top:-60px;background-image: url({{asset( $pageData['bg'] ) }} ); max-height: 350px; )">
+    @endif
 
     <div class="overlay"></div>
 
@@ -52,11 +55,14 @@
                         <section class="global-page-header" >
 
                                 <div class="row" >
+
                                     <div class="col-md-6" >
                                         <div class="block">
                                             <h2 >{{ $pageData['title'] }}</h2>
                                         </div>
                                     </div>
+
+
                                     @if($pageData['smenu'] == 23)
                                         <div class="col-md-6" >
                                             <form action="{{ route('simple_search') }}" method="GET">
@@ -69,14 +75,14 @@
                                                 </div>
                                             </form>
                                             <br>
-                                            @auth
+
                                             <div class="btn-toolbar mb-2 mb-md-0 flex-row-reverse">
                                                 <a href="{{route('adminposts.create')}}" class="btn btn-sm btn-outline-secondary">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
                                                     Adicionar Fotografia
                                                 </a>
                                             </div>
-                                            @endauth
+
                                         </div>
                                     @endif
                                 </div>

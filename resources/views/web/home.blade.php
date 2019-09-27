@@ -97,7 +97,8 @@
                     <h3 class="heading">Um contributo importante</h3>
                     <div class="heading-underline"></div>
                     <p class="lead">Envie suas fotos, partilhe com pessoas, grupos de investigação e outros interessados na pesquisas sobre mudanças climáticas, vegetação, paisagismo, etc.!</p>
-                    <a class="btn btn-primary btn-sm" href="{{route('adminposts.index')}}" target="_blank">Enviar fotografias</a>
+                    <a class="btn btn-primary btn-sm" href="{{route('gallery')}}" >Enviar fotografias</a>
+{{--                    href="{{route('adminposts.index')--}}
                 </div>
             </div>
 
